@@ -5,17 +5,16 @@ RUN apt-get update -y
 # Install Net tool
 RUN apt-get install net-tools -y
 # Create new web dir
-RUN mkdir /var/www/blog
-# Set permission for user www-data and group www-data
-RUN chown -R www-data:www-data /var/www/blog
-
+RUN mkdir /home/cicd-laravel
 
 # Config for web server
 # Important: Co-operate between nginx and php-fpm
 ADD ./my-default.conf /etc/nginx/conf.d/default.conf
 
 # Copy source to image
-ADD ../src /var/www/blog
+ADD ../src /home/cicd-laravel
+# Set permission for user www-data and group www-data
+RUN chown -R www-data:www-data /home/cicd-laravel
 
 # Choose default working dir
 # WORKDIR /var/www/blog
