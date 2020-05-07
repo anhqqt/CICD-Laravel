@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+ nginx:
+  image: "my-nginx"
+  container_name: "nginx"
+  networks:
+   - lemp-network
+  ports:
+   - "80:80"
+   - "443:443"
+
+ php:
+  image: "my-php"
+  container_name: "php"
+  networks:
+   - lemp-network
+  volumes:
+   - type: bind
+     source: /home/lemp/webdata
+     target: /home/pierrecardinvn.com/public_html
+
+ mysql:
+  image: "mysql:5.6.40"
+  container_name: "mysql"
+  networks:
+   - lemp-network
+  environment:
+   - "MYSQL_ROOT_PASSWORD=rootpassword@123"
+   - "MYSQL_USER=laravel"
+   - "MYSQL_PASSWORD=laravel@123"
+   - "MYSQL_DATABASE=laravel_db"
+
+ phpmyadmin:
+  image: "phpmyadmin/phpmyadmin"
+  container_name: "phpmyadmin"
+  networks:
+   - lemp-network
+  ports:
+   - "3333:80"
+  environment:
+   - "PMA_HOST=mysql"
+   - "MYSQL_ROOT_PASSWORD=rootpassword@123"
+
+networks:
+ lemp-network:
+  name: lamp-network
