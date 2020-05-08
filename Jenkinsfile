@@ -12,6 +12,9 @@ pipeline {
 	stages {
 		stage('Get Laravel') {
 			steps {
+				// Clear current workplace cache
+				sh "rm -rf *"
+			
 				git(url: PROJECT_GITHUB, branch: PROJECT_BRANCH)
 				sh "tar -cvzf cicd-laravel.tar.gz nginx php src docker-compose.yml" 
 				// No need stash as we run directly from the jenkins master
@@ -30,6 +33,40 @@ pipeline {
 						docker.withRegistry('', 'dockerhub_id') {
 							image.push(BUILD_ID)
 						}
+					}
+				}
+				
+				// Copy src to image folder
+				sh "cp -r src php/"
+				script {
+					dir("php") {
+						def image = docker.build(PROJECT_PHP)
+					
+						docker.withRegistry('', 'dockerhub_id') {
+							image.push(BUILD_ID)
+						}
+					}
+				}
+			}
+		}
+		
+		stage('Deploy') {
+			steps {
+				script {
+					withCredentials([sshUserPrivateKey(
+						credentialsId: 'webserver_key',
+						keyFileVariable: 'identityFile',
+						passphraseVariable: '',
+						usernameVariable: 'user'
+					)]) {
+					    def remote = [:]
+						remote.name = 'server'
+						remote.host = PROJECT_SERVER
+						remote.user = user
+						remote.identityFile = identityFile
+						remote.allowAnyHosts = true
+						
+						sshCommand remote: remote, command: "pwd"
 					}
 				}
 			}
