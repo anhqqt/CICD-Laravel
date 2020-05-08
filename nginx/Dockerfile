@@ -15,6 +15,8 @@ ADD ./my-default.conf /etc/nginx/conf.d/default.conf
 ADD ./src /home/cicd-laravel
 # Set permission for user www-data and group www-data
 RUN chown -R www-data:www-data /home/cicd-laravel
+RUN chmod -R 755 /home/cicd-laravel
+RUN chmod -R 755 /home/cicd-laravel/storage
 
 # Choose default working dir
 # WORKDIR /var/www/blog

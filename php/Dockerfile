@@ -13,6 +13,8 @@ ADD ./my-php.ini /usr/local/etc/php/php.ini
 ADD ./src /home/cicd-laravel
 # Add permission for www-data user and group
 RUN chown -R www-data:www-data /home/cicd-laravel
+RUN chmod -R 755 /home/cicd-laravel
+RUN chmod -R 755 /home/cicd-laravel/storage
 
 # Configure default WORKDIR
 # WORKDIR /var/www/blog
