@@ -20,6 +20,10 @@ pipeline {
 		}
 		
 		stage('Build Image') {
+			agent {
+				label 'docker' 
+			}
+			
 			steps {
 				sh "ls -la"
 				sh "cd nginx && ls -la"
