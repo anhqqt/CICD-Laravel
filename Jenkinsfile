@@ -53,15 +53,21 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				script {
-					def remote = [:]
-					remote.name = 'test'
-					remote.host = '23.98.73.86'
-					remote.user = 'matdecha'
-					remote.password = 'a130993310594W'
-					remote.allowAnyHosts = true
-					stage('Remote SSH') {
-					  sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/sheid1309/CICD-Laravel/master/docker-compose.yml"
-					  sshCommand remote: remote, command: "ls -la"
+					withCredentials([sshUserPrivateKey(
+						credentialsId: 'webserver_key',
+						keyFileVariable: 'identityFile',
+						passphraseVariable: '',
+						usernameVariable: 'user'
+					)]) {
+					    def remote = [:]
+						remote.name = 'server'
+						remote.host = PROJECT_SERVER
+						remote.user = user
+						remote.identityFile = identityFile
+						remote.allowAnyHosts = true
+						
+						sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/sheid1309/CICD-Laravel/master/docker-compose.yml"
+						sshCommand remote: remote, command: "ls
 					}
 				}
 			}
