@@ -15,10 +15,6 @@ services:
   container_name: "php"
   networks:
    - lemp-network
-  volumes:
-   - type: bind
-     source: /home/lemp/webdata
-     target: /home/pierrecardinvn.com/public_html
 
  mysql:
   image: "mysql:5.6.40"
