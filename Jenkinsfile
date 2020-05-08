@@ -66,7 +66,8 @@ pipeline {
 						remote.identityFile = identityFile
 						remote.allowAnyHosts = true
 						
-						sshCommand remote: remote, command: "pwd"
+						sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/sheid1309/CICD-Laravel/master/docker-compose.yml"
+						sshCommand remote: remote, command: "ls -la"
 					}
 				}
 			}
