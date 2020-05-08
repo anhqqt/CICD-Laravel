@@ -21,6 +21,8 @@ pipeline {
 		
 		stage('Build Image') {			
 			steps {
+				// Copy src to image folder
+				sh "cp -r src nginx/"
 				script {
 					dir("nginx") {
 						def image = docker.build(PROJECT_NGINX)
