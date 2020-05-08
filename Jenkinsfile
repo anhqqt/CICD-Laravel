@@ -32,6 +32,7 @@ pipeline {
 					
 						docker.withRegistry('', 'dockerhub_id') {
 							image.push(BUILD_ID)
+							image.push(latest)
 						}
 					}
 				}
@@ -44,6 +45,7 @@ pipeline {
 					
 						docker.withRegistry('', 'dockerhub_id') {
 							image.push(BUILD_ID)
+							image.push(latest)
 						}
 					}
 				}
