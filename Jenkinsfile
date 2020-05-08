@@ -21,7 +21,9 @@ pipeline {
 		
 		stage('Build Image') {
 			steps {
+				sh "ls -la"
 				sh "cd nginx"
+				sh "ls -la"
 				script {
 					def image = docker.build(PROJECT_NGINX)
 					
