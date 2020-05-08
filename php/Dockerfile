@@ -17,7 +17,7 @@ RUN chmod -R 755 /home/cicd-laravel
 RUN chmod -R 755 /home/cicd-laravel/storage
 
 # Configure default WORKDIR
-WORKDIR /home/cicd-laravel
+WORKDIR /home/cicd-laravel/
 
 # Expose port
 EXPOSE 9000
