@@ -19,19 +19,15 @@ pipeline {
 			}
 		}
 		
-		stage('Build Image') {
-			agent {
-				label 'docker' 
-			}
-			
+		stage('Build Image') {			
 			steps {
-				sh "ls -la"
-				sh "cd nginx && ls -la"
 				script {
-					def image = docker.build(PROJECT_NGINX)
+					dir("nginx") {
+						def image = docker.build(PROJECT_NGINX)
 					
-					docker.withRegistry('', 'dockerhub_id') {
-						image.push(BUILD_ID)
+						docker.withRegistry('', 'dockerhub_id') {
+							image.push(BUILD_ID)
+						}
 					}
 				}
 			}
