@@ -16,24 +16,6 @@ pipeline {
 				stash(name: 'frontend', includes: '*')
 			}
 		}
-		
-		stage('Test') {
-			steps {
-			
-			}
-		}
-		
-		stage('Deploy') {
-			steps {
-			
-			}
-		}
-		
-		stage('Test Feature') {
-			steps {
-			
-			}
-		}
 	}
 
 }
