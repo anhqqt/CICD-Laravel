@@ -13,6 +13,7 @@ pipeline {
 		stage('Get Laravel') {
 			steps {
 				git(url: PROJECT_GITHUB, branch: PROJECT_BRANCH)
+				sh "tar -cvzf cicd-laravel.tar.gz nginx php src docker-compose.yml" 
 				sh "ls -la"
 			}
 		}
