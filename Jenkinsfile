@@ -66,8 +66,12 @@ pipeline {
 						remote.identityFile = identityFile
 						remote.allowAnyHosts = true
 						
+						// Clear old docker-compose
+						sshCommand remote: remote, command: "rm -rf docker-compose.yml"
 						sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/sheid1309/CICD-Laravel/master/docker-compose.yml"
-						sshCommand remote: remote, command: "ls -la"
+						sshCommand remote: remote, command: "docker-compose down"
+						sshCommand remote: remote, command: "docker-compose up -d"
+						sshCommand remote: remote, command: "sleep 10 && docker-compose run php php artisan migrate"
 					}
 				}
 			}
