@@ -14,7 +14,21 @@ pipeline {
 			steps {
 				git(url: PROJECT_GITHUB, branch: PROJECT_BRANCH)
 				sh "tar -cvzf cicd-laravel.tar.gz nginx php src docker-compose.yml" 
-				sh "ls -la"
+				// No need stash as we run directly from the jenkins master
+				// stash includes: 'cicd-laravel.tar.gz', name: 'cicd-laravel-project'
+			}
+		}
+		
+		stage('Build Image') {
+			steps {
+				sh "cd nginx"
+				script {
+					def image = docker.build(PROJECT_NGINX)
+					
+					docker.withRegistry('', 'dockerhub_id') {
+						image.push(BUILD_ID)
+					}
+				}
 			}
 		}
 	}
