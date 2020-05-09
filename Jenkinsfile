@@ -10,7 +10,7 @@ pipeline {
 	}
 	
 	stages {
-		stage('Get Laravel') {
+		stage('Get Code') {
 			steps {
 				// Clear current workplace cache
 				sh "rm -rf *"
@@ -24,6 +24,9 @@ pipeline {
 		
 		stage('Build Image') {			
 			steps {
+				// Delete current images on Jenkins slave (currently this machine)
+				// sh "echo y | docker image prune -a"
+
 				// Copy src to image folder
 				sh "cp -r src nginx/"
 				script {
