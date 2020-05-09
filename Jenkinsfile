@@ -73,7 +73,7 @@ pipeline {
 						sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/sheid1309/CICD-Laravel/master/docker-compose.yml"
 						sshCommand remote: remote, command: "docker-compose down"
 						sshCommand remote: remote, command: "docker-compose up -d"
-						sshCommand remote: remote, command: "sleep 10 && docker exec php bash -c 'cd /home/cicd-laravel && php artisan migrate'"
+						sshCommand remote: remote, command: "sleep 5 && docker exec php bash -c 'cd /home/cicd-laravel && php artisan migrate'"
 					}
 				}
 			}
