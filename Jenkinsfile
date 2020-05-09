@@ -77,11 +77,11 @@ pipeline {
 						// Delete old containers
 						sshCommand remote: remote, command: "docker-compose down"
 						// Delete old images
-						sshCommand remote: remote, command: "docker rmi -f $(docker images -a)"
+						sshCommand remote: remote, command: "docker rmi -f \$(docker images -a)"
 						// Up new containers
 						sshCommand remote: remote, command: "docker-compose up -d"
 						// Migrate database in Laravel
-						sshCommand remote: remote, command: "docker exec php bash -c \"\cd /home/cicd-laravel && php artisan migrate\"\"
+						sshCommand remote: remote, command: "docker exec php bash -c \"cd /home/cicd-laravel && php artisan migrate\""
 					}
 				}
 			}
