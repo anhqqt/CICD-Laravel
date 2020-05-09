@@ -71,8 +71,13 @@ pipeline {
 						// Clear old docker-compose
 						sshCommand remote: remote, command: "rm -rf docker-compose.yml"
 						sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/sheid1309/CICD-Laravel/master/docker-compose.yml"
+						// Set global var
+						sshCommand remote: remote, command: "export PROJECT_NGINX=$PROJECT_NGINX:$BUILD_ID"
+						sshCommand remote: remote, command: "export PROJECT_PHP=$PROJECT_PHP:$BUILD_ID"
+						// Delete old containers and up new containers
 						sshCommand remote: remote, command: "docker-compose down"
 						sshCommand remote: remote, command: "docker-compose up -d"
+						// Migrate database in Laravel
 						sshCommand remote: remote, command: "sleep 5 && docker exec php bash -c 'cd /home/cicd-laravel && php artisan migrate'"
 					}
 				}

@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
  nginx:
-  image: "sheid1309/laravel-nginx"
+  image: ${PROJECT_NGINX}
   container_name: "nginx"
   networks:
    - lemp-network
@@ -11,7 +11,7 @@ services:
    - "443:443"
 
  php:
-  image: "sheid1309/laravel-php"
+  image: ${PROJECT_PHP}
   container_name: "php"
   networks:
    - lemp-network
