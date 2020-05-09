@@ -77,7 +77,7 @@ pipeline {
 						// Delete old containers
 						sshCommand remote: remote, command: "docker-compose down"
 						// Delete old images
-						sshCommand remote: remote, command: "docker rmi -f \$(docker images -a)"
+						sshCommand remote: remote, command: "echo y | docker image prune -a"
 						// Up new containers
 						sshCommand remote: remote, command: "docker-compose up -d"
 						// Migrate database in Laravel
