@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Welcome to Demo CI/CD Project for Laravel 11:42 PM</title>
+        <title>Welcome to Demo CI/CD Project for Laravel 12:08 AM</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
