@@ -12,18 +12,24 @@ pipeline {
 	stages {
 		stage('Get Code') {
 			steps {
+				// Notify to Slack channel
+				slackSend color: "good", message: "Get Code Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+			
 				// Clear current workplace cache
 				sh "rm -rf *"
 			
 				git(url: PROJECT_GITHUB, branch: PROJECT_BRANCH)
 				sh "tar -cvzf cicd-laravel.tar.gz nginx php src docker-compose.yml" 
 				// No need stash as we run directly from the jenkins master
-				// stash includes: 'cicd-laravel.tar.gz', name: 'cicd-laravel-project'
+				// stash includes: 'cicd-laravel.tar.gz', name: 'cicd-laravel-project'			
 			}
 		}
 		
 		stage('Build Image') {			
 			steps {
+				// Notify to Slack
+				slackSend "Build Image Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+			
 				// Delete current images on Jenkins slave (currently this machine)
 				// sh "echo y | docker image prune -a"
 
@@ -57,6 +63,9 @@ pipeline {
 		
 		stage('Deploy') {
 			steps {
+				// Notify to Slack
+				slackSend "Build Deploy Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+				
 				script {
 					withCredentials([sshUserPrivateKey(
 						credentialsId: 'webserver_key',
@@ -82,6 +91,9 @@ pipeline {
 						sshCommand remote: remote, command: "docker exec php bash -c \"cd /home/cicd-laravel && php artisan migrate\""
 					}
 				}
+				
+				// Notify to Slack again
+				slackSend color: "good", message: "Build Deployed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<http://23.98.73.86/|http://23.98.73.86/>))"
 			}
 		}
 	}
