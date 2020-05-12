@@ -28,7 +28,7 @@ pipeline {
 		stage('Build Image') {			
 			steps {
 				// Notify to Slack
-				slackSend message: """Build Image Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)\"""
+				slackSend message: """Build Image Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
 			
 				// Delete current images on Jenkins slave (currently this machine)
 				// sh "echo y | docker image prune -a"
