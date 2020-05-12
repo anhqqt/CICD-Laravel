@@ -28,7 +28,7 @@ pipeline {
 		stage('Build Image') {			
 			steps {
 				// Notify to Slack
-				slackSend "Build Image Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+				slackSend message: "Build Image Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 			
 				// Delete current images on Jenkins slave (currently this machine)
 				// sh "echo y | docker image prune -a"
@@ -64,7 +64,7 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				// Notify to Slack
-				slackSend "Build Deploy Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+				slackSend message: "Build Deploy Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 				
 				script {
 					withCredentials([sshUserPrivateKey(
