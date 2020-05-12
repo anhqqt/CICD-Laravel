@@ -13,9 +13,9 @@ pipeline {
 		stage('Get Code') {
 			steps {
 				// Notify to Slack
-				slackSend message: "Get Code Started \n
-				Job name: ${env.JOB_NAME} \n
-				Build: ${env.BUILD_NUMBER} \n
+				slackSend message: "Get Code Started /n
+				Job name: ${env.JOB_NAME} /n
+				Build: ${env.BUILD_NUMBER} /n
 				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
 				
 				// Clear current workplace cache
@@ -31,9 +31,9 @@ pipeline {
 		stage('Build Image') {			
 			steps {
 				// Notify to Slack
-				slackSend message: "Build Image Started \n
-				Job name: ${env.JOB_NAME} \n
-				Build: ${env.BUILD_NUMBER} \n
+				slackSend message: "Build Image Started /n
+				Job name: ${env.JOB_NAME} /n
+				Build: ${env.BUILD_NUMBER} /n
 				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
 			
 				// Delete current images on Jenkins slave (currently this machine)
@@ -70,9 +70,9 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				// Notify to Slack
-				slackSend message: "Build Deploy Started \n
-				Job name: ${env.JOB_NAME} \n
-				Build: ${env.BUILD_NUMBER} \n
+				slackSend message: "Build Deploy Started /n
+				Job name: ${env.JOB_NAME} /n
+				Build: ${env.BUILD_NUMBER} /n
 				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
 				
 				script {
@@ -102,9 +102,9 @@ pipeline {
 				}
 				
 				// Notify to Slack
-				slackSend color: "good", message: "Build Deploy Started \n
-				Job name: ${env.JOB_NAME} \n
-				Build: ${env.BUILD_NUMBER} \n
+				slackSend color: "good", message: "Build Deploy Started /n
+				Job name: ${env.JOB_NAME} /n
+				Build: ${env.BUILD_NUMBER} /n
 				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
 				
 			}
