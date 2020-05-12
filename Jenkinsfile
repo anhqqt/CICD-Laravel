@@ -13,10 +13,7 @@ pipeline {
 		stage('Get Code') {
 			steps {
 				// Notify to Slack
-				slackSend message: """Get Code Started
-				Job name: ${env.JOB_NAME}
-				Build: ${env.BUILD_NUMBER}
-				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
+				slackSend message: """Get Code Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
 				
 				// Clear current workplace cache
 				sh "rm -rf *"
