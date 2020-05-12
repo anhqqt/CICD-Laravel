@@ -16,8 +16,7 @@ pipeline {
 				slackSend message: """Get Code Started
 				Job name: ${env.JOB_NAME}
 				Build: ${env.BUILD_NUMBER}
-				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)
-				"""
+				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
 				
 				// Clear current workplace cache
 				sh "rm -rf *"
@@ -105,12 +104,11 @@ pipeline {
 				}
 				
 				// Notify to Slack
-				slackSend color: "good", message: """Build Deploy Started
+				slackSend color: "good", message: """Build Deploy Finished
 				Job name: ${env.JOB_NAME}
 				Build: ${env.BUILD_NUMBER}
 				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)
-				"""
-				
+				"""	
 			}
 		}
 	}
