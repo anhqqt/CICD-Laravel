@@ -13,10 +13,11 @@ pipeline {
 		stage('Get Code') {
 			steps {
 				// Notify to Slack
-				slackSend message: "Get Code Started /n
-				Job name: ${env.JOB_NAME} /n
-				Build: ${env.BUILD_NUMBER} /n
-				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
+				slackSend message: """Get Code Started
+				Job name: ${env.JOB_NAME}
+				Build: ${env.BUILD_NUMBER}
+				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)
+				"""
 				
 				// Clear current workplace cache
 				sh "rm -rf *"
@@ -31,10 +32,11 @@ pipeline {
 		stage('Build Image') {			
 			steps {
 				// Notify to Slack
-				slackSend message: "Build Image Started /n
-				Job name: ${env.JOB_NAME} /n
-				Build: ${env.BUILD_NUMBER} /n
-				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
+				slackSend message: """Build Image Started
+				Job name: ${env.JOB_NAME}
+				Build: ${env.BUILD_NUMBER}
+				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)\
+				"""
 			
 				// Delete current images on Jenkins slave (currently this machine)
 				// sh "echo y | docker image prune -a"
@@ -70,10 +72,11 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				// Notify to Slack
-				slackSend message: "Build Deploy Started /n
-				Job name: ${env.JOB_NAME} /n
-				Build: ${env.BUILD_NUMBER} /n
-				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
+				slackSend message: """Build Deploy Started 
+				Job name: ${env.JOB_NAME}
+				Build: ${env.BUILD_NUMBER}
+				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)
+				"""
 				
 				script {
 					withCredentials([sshUserPrivateKey(
@@ -102,10 +105,11 @@ pipeline {
 				}
 				
 				// Notify to Slack
-				slackSend color: "good", message: "Build Deploy Started /n
-				Job name: ${env.JOB_NAME} /n
-				Build: ${env.BUILD_NUMBER} /n
-				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"
+				slackSend color: "good", message: """Build Deploy Started
+				Job name: ${env.JOB_NAME}
+				Build: ${env.BUILD_NUMBER}
+				Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)
+				"""
 				
 			}
 		}
