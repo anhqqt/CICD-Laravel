@@ -17,7 +17,7 @@ pipeline {
 				slackSend message: """Get Code Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
 				
 				// Notify to MS Teams
-				office365ConnectorSend message: """Get Code Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)""", status:"<Build status>", webhookUrl:'MS_TEAMS_WEBHOOK'
+				office365ConnectorSend message: "Test MS Teams", status:"Test", webhookUrl:'https://outlook.office.com/webhook/81a32ad2-372b-4e55-8dc7-484600fbd0ef@c14b46fc-2780-4bee-bcfa-e3f5a1c337b9/JenkinsCI/a37adecd236e44b0a3c25aa9f07537ae/1d2f37c9-4291-4b2e-8a54-e85aa782af39'
 				
 				// Clear current workplace cache
 				sh "rm -rf *"
