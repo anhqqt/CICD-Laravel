@@ -112,7 +112,7 @@ pipeline {
 				slackSend color: "good", message: """Build Deploy Finished \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check Front-end URL at (<http://23.98.73.86/|http://23.98.73.86/>)"""	
 				
 				// Notify to MS Teams
-				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status: "Build Deploy Finished", color: "Green", webhookUrl:"${MS_TEAMS_WEBHOOK}",
+				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status: "Build Deploy Finished", color: "#1FFF00", webhookUrl:"${MS_TEAMS_WEBHOOK}",
 				factDefinitions: [[name: "Start time", template: "${BUILD_TIMESTAMP}"],
                                   [name: "Author", template: "N/A"]]
 			}
