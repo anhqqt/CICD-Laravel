@@ -17,7 +17,7 @@ pipeline {
 				slackSend message: """Get Code Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
 				
 				// Notify to MS Teams
-				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status:"Get Code Started", webhookUrl:"${MS_TEAMS_WEBHOOK}",
+				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status: "Get Code Started", webhookUrl:"${MS_TEAMS_WEBHOOK}",
 				factDefinitions: [[name: "Start time", template: "${BUILD_TIMESTAMP}"],
                                   [name: "Author", template: "N/A"]]
 				
@@ -35,7 +35,12 @@ pipeline {
 			steps {
 				// Notify to Slack
 				slackSend message: """Build Image Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
-			
+				
+				// Notify to MS Teams
+				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status: "Build Image Started", webhookUrl:"${MS_TEAMS_WEBHOOK}",
+				factDefinitions: [[name: "Start time", template: "${BUILD_TIMESTAMP}"],
+                                  [name: "Author", template: "N/A"]]
+				
 				// Delete current images on Jenkins slave (currently this machine)
 				// sh "echo y | docker image prune -a"
 
@@ -72,6 +77,11 @@ pipeline {
 				// Notify to Slack
 				slackSend message: """Build Deploy Started \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check build output at (<${env.BUILD_URL}|${env.BUILD_URL}>)"""
 				
+				// Notify to MS Teams
+				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status: "Build Deploy Started", webhookUrl:"${MS_TEAMS_WEBHOOK}",
+				factDefinitions: [[name: "Start time", template: "${BUILD_TIMESTAMP}"],
+                                  [name: "Author", template: "N/A"]]
+				
 				script {
 					withCredentials([sshUserPrivateKey(
 						credentialsId: 'webserver_key',
@@ -100,6 +110,11 @@ pipeline {
 				
 				// Notify to Slack
 				slackSend color: "good", message: """Build Deploy Finished \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check Front-end URL at (<http://23.98.73.86/|http://23.98.73.86/>)"""	
+				
+				// Notify to MS Teams
+				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status: "Build Deploy Finished", color: "Green", webhookUrl:"${MS_TEAMS_WEBHOOK}",
+				factDefinitions: [[name: "Start time", template: "${BUILD_TIMESTAMP}"],
+                                  [name: "Author", template: "N/A"]]
 			}
 		}
 	}
