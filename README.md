@@ -3,4 +3,5 @@
 
 ## About This Project
 
-This is a project to test a simple CI/CD progress with Jenkins and Laravel PHP Framework. Thanks
+This is a project to test a simple CI/CD progress with Jenkins and Laravel PHP Framework
+
