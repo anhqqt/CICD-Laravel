@@ -6,7 +6,7 @@ pipeline {
 		PROJECT_BRANCH = 'master'
 		PROJECT_NGINX = 'sheid1309/laravel-nginx'
 		PROJECT_PHP = 'sheid1309/laravel-php'
-		PROJECT_SERVER = '23.98.73.86'
+		PROJECT_SERVER = '52.187.160.100'
 		MS_TEAMS_WEBHOOK = 'https://outlook.office.com/webhook/81a32ad2-372b-4e55-8dc7-484600fbd0ef@c14b46fc-2780-4bee-bcfa-e3f5a1c337b9/JenkinsCI/a37adecd236e44b0a3c25aa9f07537ae/1d2f37c9-4291-4b2e-8a54-e85aa782af39'
 	}
 	
@@ -109,7 +109,7 @@ pipeline {
 				}
 				
 				// Notify to Slack
-				slackSend color: "good", message: """Build Deploy Finished \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check Front-end URL at (<http://23.98.73.86/|http://23.98.73.86/>)"""	
+				slackSend color: "good", message: """Build Deploy Finished \n Job name: ${env.JOB_NAME} \n Build: ${env.BUILD_NUMBER} \n Check Front-end URL at (<http://${env.PROJECT_SERVER}|http://${env.PROJECT_SERVER}/>)"""	
 				
 				// Notify to MS Teams
 				office365ConnectorSend message: "Last status of Build #${env.BUILD_NUMBER}", status: "Build Deploy Finished", color: "#1FFF00", webhookUrl:"${MS_TEAMS_WEBHOOK}",
