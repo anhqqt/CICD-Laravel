@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Editted on 12/10/2020 - 00:24
+                    Editted on 12/10/2020 - 00:28
                 </div>
 
                 <div class="links">
